@@ -57,34 +57,6 @@ VITE_NHOST_SUBDOMAIN=your_nhost_subdomain
 VITE_NHOST_REGION=your_nhost_region
 ```
 
-## 🚀 Deployment
-
-### Netlify Deployment
-
-1. **Connect Repository**: Link your GitHub repo to Netlify
-
-2. **Build Settings**:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-   - Node version: `18`
-
-3. **Environment Variables**:
-   - `VITE_NHOST_SUBDOMAIN`: Your Nhost project subdomain
-   - `VITE_NHOST_REGION`: Your Nhost project region
-
-4. **Deploy**: Netlify will automatically build and deploy your app
-
-### Manual Deployment
-
-```bash
-# Install dependencies
-npm install
-
-# Build for production
-npm run build
-
-# Deploy the dist folder to your hosting provider
-```
 
 ## 📖 Development
 
