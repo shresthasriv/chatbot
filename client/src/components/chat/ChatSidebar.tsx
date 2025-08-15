@@ -13,7 +13,6 @@ import {
   DELETE_CHAT,
   CHATS_SUBSCRIPTION,
 } from '@/lib/graphql'
-import type { Chat } from '@shared/schema'
 
 export function ChatSidebar() {
   const user = useUserData()
@@ -117,7 +116,7 @@ export function ChatSidebar() {
   }
 
   return (
-    <div className={`w-80 flex flex-col ${
+    <div className={`w-80 max-w-80 min-w-80 flex flex-col overflow-hidden ${
       theme === 'dark' 
         ? 'bg-gray-900/50 border-gray-700/50' 
         : 'bg-white/80 border-gray-200'
@@ -219,7 +218,7 @@ export function ChatSidebar() {
           </div>
         ) : (
           <div className="space-y-2">
-            {chats.map((chat: Chat & { messages?: any[] }) => (
+            {chats.map((chat: any) => (
               <div key={chat.id} className="group">
                 <button
                   onClick={() => handleSelectChat(chat.id)}
@@ -233,36 +232,38 @@ export function ChatSidebar() {
                         : 'bg-gray-50 hover:bg-gray-100 border border-transparent hover:border-gray-200'
                   }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0">
-                      <h3 className={`font-medium truncate ${
+                  <div className="grid grid-cols-[1fr_24px] gap-3 items-start w-full">
+                    <div className="min-w-0 overflow-hidden">
+                      <h3 className={`font-medium truncate text-sm leading-5 ${
                         theme === 'dark' ? 'text-white' : 'text-gray-900'
                       }`}>
                         {chat.title}
                       </h3>
                       {chat.messages && chat.messages[0] && (
-                        <p className={`text-sm truncate mt-1 ${
+                        <p className={`text-xs truncate mt-1 leading-4 ${
                           theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-                        }`}>
+                        }`} style={{ maxWidth: '100%' }}>
                           {chat.messages[0].content}
                         </p>
                       )}
-                      <span className={`text-xs ${
+                      <span className={`text-xs truncate mt-1 block ${
                         theme === 'dark' ? 'text-gray-500' : 'text-gray-400'
                       }`}>
                         {formatTimestamp(chat.updated_at || chat.created_at)}
                       </span>
                     </div>
-                    <button
-                      onClick={(e) => handleDeleteChat(chat.id, e)}
-                      className={`opacity-0 group-hover:opacity-100 transition-all duration-200 ml-2 ${
-                        theme === 'dark' 
-                          ? 'text-gray-400 hover:text-red-400' 
-                          : 'text-gray-400 hover:text-red-500'
-                      }`}
-                    >
-                      <i className="fas fa-trash text-xs"></i>
-                    </button>
+                    <div className="flex justify-center items-start pt-1">
+                      <button
+                        onClick={(e) => handleDeleteChat(chat.id, e)}
+                        className={`opacity-0 group-hover:opacity-100 transition-all duration-200 w-4 h-4 flex items-center justify-center hover:scale-110 ${
+                          theme === 'dark' 
+                            ? 'text-gray-400 hover:text-red-400' 
+                            : 'text-gray-400 hover:text-red-500'
+                        }`}
+                      >
+                        <i className="fas fa-trash text-xs"></i>
+                      </button>
+                    </div>
                   </div>
                 </button>
               </div>
