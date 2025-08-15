@@ -130,5 +130,3 @@ This application meets all requirements of the internship assessment:
 For any issues or questions, please refer to the assignment documentation or contact the development team.
 
 ---
-
-**Built with ❤️ for the Subspace Internship Assessment**
